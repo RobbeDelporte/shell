@@ -4,7 +4,6 @@ qs_qml_module(caelestia-qml-utils
         Searcher.qml
         scripts/fzf.js
         scripts/fuzzysort.js
-        scripts/lrcparser.js
     QML_SINGLETONS
         Icons.qml
         Images.qml
