@@ -3,6 +3,8 @@ qs_qml_module(caelestia-qml-modules-controlcenter-launcher
     QML_FILES
         LauncherPane.qml
         Settings.qml
+    QML_SINGLETONS
+        AppSearcher.qml
     DEPENDENCIES
         QtQuick
         QtQuick.Layouts

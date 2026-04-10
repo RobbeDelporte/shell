@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import "../../../utils/scripts/fuzzysort.js" as Fuzzy
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
@@ -65,40 +64,8 @@ Item {
         Config.save();
     }
 
-    function filterApps(search: string): list<var> {
-        if (!search || search.trim() === "") {
-            const apps = [];
-            for (let i = 0; i < allAppsDb.apps.length; i++) {
-                apps.push(allAppsDb.apps[i]);
-            }
-            return apps;
-        }
-
-        if (!allAppsDb.apps || allAppsDb.apps.length === 0) {
-            return [];
-        }
-
-        const preparedApps = [];
-        for (let i = 0; i < allAppsDb.apps.length; i++) {
-            const app = allAppsDb.apps[i];
-            const name = app.name || app.entry?.name || "";
-            preparedApps.push({
-                _item: app,
-                name: Fuzzy.prepare(name)
-            });
-        }
-
-        const results = Fuzzy.go(search, preparedApps, {
-            all: true,
-            keys: ["name"],
-            scoreFn: r => r[0].score
-        });
-
-        return results.sort((a, b) => b._score - a._score).map(r => r.obj._item);
-    }
-
     function updateFilteredApps() {
-        filteredApps = filterApps(searchText);
+        filteredApps = AppSearcher.query(searchText);
     }
 
     anchors.fill: parent
@@ -125,20 +92,12 @@ Item {
         target: root.session.launcher
     }
 
-    AppDb {
-        id: allAppsDb
-
-        path: `${Paths.state}/apps.sqlite`
-        favouriteApps: Config.launcher.favouriteApps
-        entries: DesktopEntries.applications.values
-    }
-
     Connections {
         function onAppsChanged() {
             updateFilteredApps();
         }
 
-        target: allAppsDb
+        target: AppSearcher.appDb
     }
 
     SplitPaneLayout {
@@ -188,7 +147,7 @@ Item {
 
                 StyledText {
                     Layout.topMargin: Appearance.spacing.large
-                    text: qsTr("Applications (%1)").arg(root.searchText ? root.filteredApps.length : allAppsDb.apps.length)
+                    text: qsTr("Applications (%1)").arg(root.searchText ? root.filteredApps.length : AppSearcher.appDb.apps.length)
                     font.pointSize: Appearance.font.size.normal
                     font.weight: 500
                 }
