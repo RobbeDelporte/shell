@@ -5,6 +5,7 @@ add_subdirectory(utils)
 add_subdirectory(modules)
 
 configure_file(shell.qml "${CMAKE_BINARY_DIR}/Shell.qml" COPYONLY)
+_fix_imports("${CMAKE_BINARY_DIR}/Shell.qml")
 set_source_files_properties("${CMAKE_BINARY_DIR}/Shell.qml" PROPERTIES QT_RESOURCE_ALIAS "Shell.qml")
 qml_module(caelestia-qml
     URI Caelestia.Qml

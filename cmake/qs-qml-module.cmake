@@ -42,6 +42,8 @@ function(qs_qml_module arg_TARGET)
         LIBRARIES ${arg_LIBRARIES}
     )
 
+    target_compile_options(${arg_TARGET} PRIVATE -Wno-implicit-int-float-conversion -Wno-float-conversion -Wno-shorten-64-to-32)
+
     # Mostly disable clazy warnings (we can't completely disable it, so we just set it to qenums which isn't likely to trigger)
     if(CMAKE_CXX_COMPILER MATCHES ".*clazy")
         set_target_properties(${arg_TARGET} PROPERTIES
