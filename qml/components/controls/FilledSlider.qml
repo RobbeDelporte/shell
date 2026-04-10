@@ -1,7 +1,7 @@
-import ".."
-import "../effects"
 import QtQuick
 import QtQuick.Templates
+import qs.components
+import qs.components.effects
 import qs.services
 import qs.config
 

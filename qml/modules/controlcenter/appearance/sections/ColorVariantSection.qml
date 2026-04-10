@@ -1,7 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import ".."
-import "../../../launcher/services"
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
@@ -10,6 +8,8 @@ import qs.components.containers
 import qs.components.controls
 import qs.services
 import qs.config
+import qs.modules.controlcenter.appearance
+import qs.modules.launcher.services
 
 CollapsibleSection {
     title: qsTr("Color variant")

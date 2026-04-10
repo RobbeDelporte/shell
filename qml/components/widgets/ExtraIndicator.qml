@@ -1,6 +1,6 @@
-import ".."
-import "../effects"
 import QtQuick
+import qs.components
+import qs.components.effects
 import qs.services
 import qs.config
 

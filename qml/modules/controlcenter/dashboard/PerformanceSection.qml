@@ -1,5 +1,3 @@
-import ".."
-import "../components"
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.UPower
@@ -7,6 +5,8 @@ import qs.components
 import qs.components.controls
 import qs.services
 import qs.config
+import qs.modules.controlcenter
+import qs.modules.controlcenter.components
 
 SectionContainer {
     id: root

@@ -1,9 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import ".."
-import "../components"
 import "./sections"
-import "../../launcher/services"
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
@@ -17,6 +14,9 @@ import qs.components.images
 import qs.services
 import qs.config
 import qs.utils
+import qs.modules.controlcenter
+import qs.modules.controlcenter.components
+import qs.modules.launcher.services
 
 Item {
     id: root

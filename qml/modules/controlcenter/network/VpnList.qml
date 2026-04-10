@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import ".."
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -10,6 +9,7 @@ import qs.components.controls
 import qs.components.effects
 import qs.services
 import qs.config
+import qs.modules.controlcenter
 
 ColumnLayout {
     id: root

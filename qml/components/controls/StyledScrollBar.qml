@@ -1,6 +1,6 @@
-import ".."
 import QtQuick
 import QtQuick.Templates
+import qs.components
 import qs.services
 import qs.config
 

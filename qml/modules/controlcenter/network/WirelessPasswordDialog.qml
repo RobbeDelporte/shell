@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import ".."
 import "."
 import QtQuick
 import QtQuick.Layouts
@@ -12,6 +11,7 @@ import qs.components.effects
 import qs.services
 import qs.config
 import qs.utils
+import qs.modules.controlcenter
 
 Item {
     id: root

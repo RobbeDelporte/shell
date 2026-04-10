@@ -1,6 +1,6 @@
-import ".."
 import QtQuick
 import QtQuick.Shapes
+import qs.components
 import qs.services
 import qs.config
 

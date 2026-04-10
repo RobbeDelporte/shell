@@ -1,9 +1,9 @@
 pragma ComponentBehavior: Bound
 
-import ".."
-import "../effects"
 import QtQuick
 import QtQuick.Layouts
+import qs.components
+import qs.components.effects
 import qs.services
 import qs.config
 

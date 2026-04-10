@@ -1,7 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import ".."
-import "../components"
 import "."
 import QtQuick
 import Quickshell.Bluetooth
@@ -10,6 +8,8 @@ import qs.components
 import qs.components.containers
 import qs.components.controls
 import qs.config
+import qs.modules.controlcenter
+import qs.modules.controlcenter.components
 
 SplitPaneWithDetails {
     id: root
