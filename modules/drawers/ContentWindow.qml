@@ -300,6 +300,9 @@ StyledWindow {
         implicitWidth: panel.width
         implicitHeight: panel.height
         radius: Tokens.rounding.large
-        deformScale: deformAmount / 10000
+        // Disable velocity-driven blob deformation (BlobRect's underdamped spring on the
+        // deform matrix — see plugin/src/Caelestia/Blobs/blobrect.cpp). `deformScale` is
+        // the stretch factor on velocity; zero ⇒ target matrix stays identity ⇒ no wobble.
+        deformScale: 0
     }
 }
