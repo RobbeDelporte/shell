@@ -61,6 +61,18 @@ void ConfigObject::loadFromJson(const QJsonObject& obj) {
             continue;
         }
 
+        // Handle QList<qreal> explicitly (QVariantList → QList<qreal> is not auto-converted)
+        if (prop.metaType() == QMetaType::fromType<QList<qreal>>()) {
+            QList<qreal> list;
+            const auto jsonArr = jsonVal.toArray();
+            for (const auto& v : jsonArr)
+                list.append(v.toDouble());
+            prop.write(this, QVariant::fromValue(list));
+            m_loadedKeys.insert(key);
+            qCDebug(lcConfig) << "  Loaded" << key << "=" << list;
+            continue;
+        }
+
         // For all other types, let Qt's variant conversion handle it
         prop.write(this, jsonVal.toVariant());
         m_loadedKeys.insert(key);
@@ -114,6 +126,14 @@ QJsonObject ConfigObject::toJsonObject() const {
 
         if (prop.metaType().id() == QMetaType::QVariantList) {
             obj.insert(key, QJsonArray::fromVariantList(value.toList()));
+            continue;
+        }
+
+        if (prop.metaType() == QMetaType::fromType<QList<qreal>>()) {
+            QJsonArray arr;
+            for (qreal n : value.value<QList<qreal>>())
+                arr.append(n);
+            obj.insert(key, arr);
             continue;
         }
 
