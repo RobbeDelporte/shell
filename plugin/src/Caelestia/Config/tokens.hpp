@@ -30,9 +30,14 @@ public:
         , m_standard({ 0.2, 0, 0, 1, 1, 1 })
         , m_standardAccel({ 0.3, 0, 1, 1, 1, 1 })
         , m_standardDecel({ 0, 0, 0, 1, 1, 1 })
-        , m_expressiveFastSpatial({ 0.42, 1.67, 0.21, 0.9, 1, 1 })
-        , m_expressiveDefaultSpatial({ 0.38, 1.21, 0.22, 1, 1, 1 })
-        , m_expressiveSlowSpatial({ 0.39, 1.29, 0.35, 0.98, 1, 1 }) {}
+        // Upstream ships Material 3 "expressive" spring curves here, with
+        // y > 1 (overshoot) and non-monotonic x (time-reversal). Combined
+        // with separate per-axis animations that creates a visible wobble
+        // on popout open/close. Replace with the plain `standard` cubic
+        // (monotonic, no overshoot) so popouts ease cleanly to their target.
+        , m_expressiveFastSpatial({ 0.2, 0, 0, 1, 1, 1 })
+        , m_expressiveDefaultSpatial({ 0.2, 0, 0, 1, 1, 1 })
+        , m_expressiveSlowSpatial({ 0.2, 0, 0, 1, 1, 1 }) {}
 };
 
 class RoundingTokens : public ConfigObject {

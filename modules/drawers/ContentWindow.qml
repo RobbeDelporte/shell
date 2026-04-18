@@ -300,6 +300,10 @@ StyledWindow {
         implicitWidth: panel.width
         implicitHeight: panel.height
         radius: Tokens.rounding.large
-        deformScale: deformAmount / 10000
+        // Disable the velocity-based squash-and-stretch deformation entirely.
+        // Upstream's `deformAmount / 10000` drives a spring target off of
+        // panel velocity, causing visible wobble on popout open/close. With
+        // deformScale=0 the target matrix is always identity → no wobble.
+        deformScale: 0
     }
 }
