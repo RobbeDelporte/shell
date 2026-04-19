@@ -17,6 +17,7 @@ StyledWindow {
     id: root
 
     readonly property alias bar: bar
+    readonly property alias interactionWrapper: interactions
 
     readonly property HyprlandMonitor monitor: Hypr.monitorFor(screen)
     readonly property bool hasSpecialWorkspace: (monitor?.lastIpcObject.specialWorkspace?.name.length ?? 0) > 0
@@ -229,6 +230,8 @@ StyledWindow {
     }
 
     Interactions {
+        id: interactions
+
         screen: root.screen
         popouts: panels.popouts
         visibilities: visibilities
@@ -300,10 +303,6 @@ StyledWindow {
         implicitWidth: panel.width
         implicitHeight: panel.height
         radius: Tokens.rounding.large
-        // Disable the velocity-based squash-and-stretch deformation entirely.
-        // Upstream's `deformAmount / 10000` drives a spring target off of
-        // panel velocity, causing visible wobble on popout open/close. With
-        // deformScale=0 the target matrix is always identity → no wobble.
-        deformScale: 0
+        deformScale: (deformAmount * Config.appearance.deformScale) / 10000
     }
 }
