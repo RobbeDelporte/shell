@@ -156,11 +156,14 @@ WlSessionLockSurface {
         }
     }
 
-    ScreencopyView {
+    Image {
         id: background
 
         anchors.fill: parent
-        captureSource: root.screen
+        source: Wallpapers.current
+        fillMode: Image.PreserveAspectCrop
+        asynchronous: true
+        cache: true
         opacity: 0
 
         layer.enabled: true
